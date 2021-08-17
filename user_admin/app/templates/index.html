@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+    <title>IndexPage</title>
+  </head>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Add a gray background color with some padding */
+body {
+  font-family: Arial;
+  padding: 20px;
+  background: #f1f1f1;
+}
+
+/* Header/Blog Title */
+.header {
+  padding: 30px;
+  font-size: 30px;
+  text-align: center;
+  background: #ddd;
+}
+
+/* Create two unequal columns that floats next to each other */
+/* Left column */
+.leftcolumn {   
+  float: left;
+  width: 100%;
+}
+
+/* Add a card effect for articles */
+.card {
+   background-color: white;
+   padding: 20px;
+   margin-top: 20px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Footer */
+.footer {
+  padding: 20px;
+  text-align: center;
+  background: #ddd;
+  margin-top: 20px;
+}
+
+</style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Blogging Application</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-link active" aria-current="page"  href="">Home</a>
+          <a class="nav-link" href="{% url 'blog' %}">Create Blog</a>
+          <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <br>
+<div class="header">
+  <h2>Blog Page</h2>
+</div>
+{% for var in blog %}
+<div class="row">
+  <div class="leftcolumn">
+    <div class="card">
+      <h3>{{var.title}}</h3>
+      <p>{{var.desc}}</p>
+      <center>
+        <a href="{% url 'editblog' var.id %}" class="btn btn-warning btn-sm" style="height: 30px; width: 70px;">Edit</a>
+        <a href="{% url 'delblog' var.id %}" class="btn btn-danger btn-sm" style="height: 30px; width: 70px;">Delete</a>  
+      </center>
+    </div>
+  </div>
+</div>
+{% endfor %}
+<div class="footer">
+  <h2>Footer</h2>
+</div>
+
+</body>
+</html>
